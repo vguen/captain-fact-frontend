@@ -86,20 +86,15 @@ export default class Sidebar extends React.PureComponent {
             <this.MenuListLink to="/extension" iconName="puzzle-piece">
               {t('menu.extension')}
             </this.MenuListLink>
+            <this.MenuListLink to="/support-us" iconName="heart">
+              {t('menu.donation')}&nbsp;
+            </this.MenuListLink>
             <ExternalLinkNewTab
               href="https://forum.captainfact.io"
               className="hide-when-collapsed link-with-icon"
             >
               <RawIcon name="users" />
               {t('menu.forum')}&nbsp;
-              <LinkExternal size="1em" />
-            </ExternalLinkNewTab>
-            <ExternalLinkNewTab
-              href="https://opencollective.com/captainfact_io"
-              className="hide-when-collapsed link-with-icon"
-            >
-              <RawIcon name="heart" />
-              {t('menu.donation')}&nbsp;
               <LinkExternal size="1em" />
             </ExternalLinkNewTab>
             <this.MenuListLink to="/help" iconName="question-circle">
