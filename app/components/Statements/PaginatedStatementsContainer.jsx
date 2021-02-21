@@ -32,6 +32,7 @@ const PaginatedStatementsContainer = ({
   limit = 16,
   ...props
 }) => {
+  const filters = {commented: false}
   return (
     <Query
       query={query}
