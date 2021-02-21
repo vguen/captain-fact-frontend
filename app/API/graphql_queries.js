@@ -96,8 +96,8 @@ export const loggedInUserTodayReputationGain = gql`
 `
 
 export const StatementsQuery = gql`
-  query StatementsIndex($offset: Int! = 1, $limit: Int! = 16, $commented: Boolean! = true) {
-    statements(limit: $limit, offset: $offset, commented: $commented) {
+  query StatementsIndex($offset: Int! = 1, $limit: Int! = 16) {
+    statements(limit: $limit, offset: $offset) {
       pageNumber
       pageSize
       totalEntries
@@ -109,7 +109,7 @@ export const StatementsQuery = gql`
           fullName
           title
         }
-        comments @include(if: $commented) {
+        comments {
           id
           text
           approve

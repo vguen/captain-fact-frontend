@@ -22,18 +22,18 @@ const StatementPageHeader = styled.section`
   margin-bottom: 20px;
 `
 
-const StatementsWithCommentsFilterBar = ({ commentedStatmentsFilter }) => {
-  return (
-    <nav className="level videos-filter">
-      <FieldWithLabelAddon
-        onClick={() => commentedStatmentsFilter(true)}
-        label={t('misc.source')}>
-      </FieldWithLabelAddon>
-      <FieldWithLabelAddon onClick={() => commentedStatmentsFilter(false)} label={t('misc.languageFilter')}>
-      </FieldWithLabelAddon>
-    </nav>
-  )
-}
+// const StatementsWithCommentsFilterBar = ({ commentedStatmentsFilter }) => {
+//   return (
+//     <nav className="level videos-filter">
+//       <FieldWithLabelAddon
+//         onClick={() => commentedStatmentsFilter(true)}
+//         label={t('misc.source')}>
+//       </FieldWithLabelAddon>
+//       <FieldWithLabelAddon onClick={() => commentedStatmentsFilter(false)} label={t('misc.languageFilter')}>
+//       </FieldWithLabelAddon>
+//     </nav>
+//   )
+// }
 
 @connect(
   (state) => ({
@@ -57,8 +57,10 @@ export default class StatementsIndexPage extends React.PureComponent {
             content="Découvrez diverses déclarations sourcées et vérifiées par la communauté CaptainFact"
           />
         </Helmet>
-        <StatementsWithCommentsFilterBar
-        />
+        {
+          // <StatementsWithCommentsFilterBar
+          // />
+        }
         <StatementPageHeader>
           <h2 className="title is-2">
             <Icon name="television" />
