@@ -30,13 +30,12 @@ const PaginatedStatementsContainer = ({
   showPagination = true,
   currentPage = 1,
   limit = 16,
-  commentedStatements,
   ...props
 }) => {
   return (
     <Query
       query={query}
-      variables={{ offset: currentPage, limit, commented: commentedStatements, ...queryArgs }}
+      variables={{ offset: currentPage, limit, filters, ...queryArgs }}
       fetchPolicy="network-only"
     >
       {({ loading, error, data }) => {
