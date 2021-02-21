@@ -94,3 +94,38 @@ export const loggedInUserTodayReputationGain = gql`
     }
   }
 `
+
+export const StatementsQuery = gql`
+  query StatementsIndex($offset: Int! = 1, $limit: Int! = 16, $commented: Boolean! = true) {
+    statements(limit: $limit, offset: $offset, commented: $commented) {
+      pageNumber
+      pageSize
+      totalEntries
+      totalPages
+      entries {
+        id
+        text
+        speaker {
+          fullName
+          title
+        }
+        comments @include(if: $commented) {
+          id
+          text
+          approve
+          score
+          user {
+            id
+            name
+            username
+            pictureUrl
+          }
+          source {
+            id
+            url
+          }
+        }
+      }
+    }
+  }
+`
