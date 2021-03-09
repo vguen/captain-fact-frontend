@@ -14,7 +14,7 @@ import { Icon, TimeSince } from '../Utils'
 import CardLayout from '../Utils/CardLayout'
 import RawIcon from '../Utils/RawIcon'
 import { MAX_VIDEO_CARD_SPEAKERS } from '../../constants'
-import { videoURL } from '../../lib/cf_routes'
+import { statementURL } from '../../lib/cf_routes'
 import iterateWithSeparators from '../../lib/iterate_with_separators'
 import { classifyComments } from '../../state/video_debate/comments/selectors'
 import {
@@ -183,6 +183,7 @@ class StatementCard extends React.PureComponent {
     const hasComments = statement.comments.length > 0
     const { approvingFacts, refutingFacts, regularComments, speakerComments } = parseComment(statement.comments, statement.speakerId)
     const { showing, replyTo } = this.state
+    const linkTarget = statementURL(statement.video.hashId, statement.id)
 
     return (
       <StatementColumn className="column is-11">
@@ -195,6 +196,9 @@ class StatementCard extends React.PureComponent {
             </StatementHeader>
           }
           <StatementText>{statement.text}</StatementText>
+          <Link to={linkTarget}>
+            {statement.video.title}
+          </Link>
           <CommentsContainer>
             {hasComments == false ? (
               <CommentForm

@@ -109,6 +109,10 @@ export const StatementsQuery = gql`
           fullName
           title
         }
+        video {
+          hashId
+          title
+        }
         comments {
           id
           text
