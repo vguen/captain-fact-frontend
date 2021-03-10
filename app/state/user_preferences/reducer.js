@@ -64,7 +64,7 @@ const UserPreferencesReducer = handleActions(
     [toggleBackgroundSound]: (state) => {
       return updateState(state, 'enableSoundOnBackgroundFocus', !state.enableSoundOnBackgroundFocus)
     },
-    [commentedStatmentsFilter]: (state) => updateState(state, 'commentedStatments', !state.commentedStatments)
+    [commentedStatmentsFilter]: (state, { payload }) => updateState(state, 'commentedStatements', payload)
   },
   loadState()
 )

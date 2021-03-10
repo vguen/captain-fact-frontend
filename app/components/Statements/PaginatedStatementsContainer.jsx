@@ -21,6 +21,14 @@ const StatementPaginationMenu = styled(PaginationMenu)`
   }
 `
 
+const buildFiltersFromProps = ({ commentedStatements }) => {
+  const filters = {}
+
+  filters.commented = commentedStatements
+
+  return filters
+}
+
 const PaginatedStatementsContainer = ({
   t,
   baseURL,
@@ -32,7 +40,7 @@ const PaginatedStatementsContainer = ({
   limit = 16,
   ...props
 }) => {
-  const filters = {commented: false}
+  const filters = buildFiltersFromProps(props)
   return (
     <Query
       query={query}

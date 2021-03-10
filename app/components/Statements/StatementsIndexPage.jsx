@@ -7,9 +7,13 @@ import { Helmet } from 'react-helmet'
 
 import { toAbsoluteURL } from '../../lib/cf_routes'
 import { Icon } from '../Utils'
+import Button from '../Utils/Button'
 import { commentedStatmentsFilter } from '../../state/user_preferences/reducer'
 import PaginatedStatementsContainer from './PaginatedStatementsContainer'
 import styled from 'styled-components'
+import { themeGet } from 'styled-system'
+import { Comments } from 'styled-icons/fa-solid/Comments'
+import { QuestionCircle } from 'styled-icons/fa-solid/QuestionCircle'
 
 const StatementPage = styled.div`
   text-align: center;
@@ -22,18 +26,35 @@ const StatementPageHeader = styled.section`
   margin-bottom: 20px;
 `
 
-// const StatementsWithCommentsFilterBar = ({ commentedStatmentsFilter }) => {
-//   return (
-//     <nav className="level videos-filter">
-//       <FieldWithLabelAddon
-//         onClick={() => commentedStatmentsFilter(true)}
-//         label={t('misc.source')}>
-//       </FieldWithLabelAddon>
-//       <FieldWithLabelAddon onClick={() => commentedStatmentsFilter(false)} label={t('misc.languageFilter')}>
-//       </FieldWithLabelAddon>
-//     </nav>
-//   )
-// }
+const IsCommentedFilterButton = styled(Button)`
+  &&.set {
+    background-color: ${themeGet('colors.primary')};
+    color: ${themeGet('colors.white')};
+  }
+`
+
+const NavBar = styled.nav`
+  && {
+    justify-content: center;
+  }
+`
+
+const StatementsWithCommentsFilterBar = ({ commentedStatmentsFilter, isCommented, t }) => {
+  return (
+    <NavBar className="level videos-filter">
+      <IsCommentedFilterButton className={`${isCommented() == true ? "set" : ""}`} onClick={() => commentedStatmentsFilter(true)}>
+        <Comments size="1em" />
+        &nbsp;
+        commented
+      </IsCommentedFilterButton>
+      <IsCommentedFilterButton className={`${isCommented() == false ? "set" : ""}`} onClick={() => commentedStatmentsFilter(false)}>
+        <QuestionCircle size="1em" />
+        &nbsp;
+        to verify
+      </IsCommentedFilterButton>
+    </NavBar>
+  )
+}
 
 @connect(
   (state) => ({
@@ -44,7 +65,7 @@ const StatementPageHeader = styled.section`
 @withNamespaces('main')
 export default class StatementsIndexPage extends React.PureComponent {
   render() {
-    const { t, location } = this.props
+    const { commentedStatements, commentedStatmentsFilter, t, location } = this.props
     const currentPage = parseInt(location.query.page) || 1
 
     return (
@@ -57,21 +78,26 @@ export default class StatementsIndexPage extends React.PureComponent {
             content="Découvrez diverses déclarations sourcées et vérifiées par la communauté CaptainFact"
           />
         </Helmet>
-        {
-          // <StatementsWithCommentsFilterBar
-          // />
-        }
         <StatementPageHeader>
           <h2 className="title is-2">
             <Icon name="television" />
             <span> {capitalize(t('entities.lastStatements'))}</span>
           </h2>
+          <StatementsWithCommentsFilterBar
+            commentedStatmentsFilter={(v) => commentedStatmentsFilter(v)}
+            isCommented={() => this.isCommented()}
+          />
         </StatementPageHeader>
          <PaginatedStatementsContainer
-           baseURL={this.props.location.pathname}
-           currentPage={currentPage}
+          baseURL={this.props.location.pathname}
+          currentPage={currentPage}
+          commentedStatements={commentedStatements}
          />
       </StatementPage>
     )
+  }
+
+  isCommented() {
+    return this.props.commentedStatements
   }
 }
