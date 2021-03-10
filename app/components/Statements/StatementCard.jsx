@@ -201,6 +201,8 @@ class StatementCard extends React.PureComponent {
           }
           <StatementText>{statement.text}</StatementText>
           <Link to={linkTarget}>
+            <RawIcon name="play-circle" />
+            &nbsp;
             {statement.video.title}
           </Link>
           <CommentsContainer>
