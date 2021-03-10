@@ -206,7 +206,9 @@ class StatementCard extends React.PureComponent {
             {statement.video.title}
           </Link>
           <CommentsContainer>
-            {hasComments == false ? (
+            { /* TODO: Add a CommentForm
+
+            {hasComments == false ? ( 
               <CommentForm
                 statementID={Number(statement.id)}
                 setReplyToComment={this.setReplyToComment}
@@ -214,6 +216,8 @@ class StatementCard extends React.PureComponent {
                 user={isAuthenticated ? loggedInUser : null}
               />
             ) : (
+            */ }
+            {hasComments == true && ( 
               <Fragment>
                 <StatementCardFooter onClick={() => this.setState({ showing: !showing })}>
                   <ul>
@@ -235,12 +239,14 @@ class StatementCard extends React.PureComponent {
                       approvingFacts={approvingFacts}
                       refutingFacts={refutingFacts}
                     />
+                    { /* 
                     <CommentForm
                       statementID={Number(statement.id)}
                       setReplyToComment={this.setReplyToComment}
                       replyTo={replyTo}
                       user={isAuthenticated ? loggedInUser : null}
                     />
+                    */ }
                   </Fragment>
                 )}
               </Fragment>
