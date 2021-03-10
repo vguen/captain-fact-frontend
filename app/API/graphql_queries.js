@@ -106,8 +106,11 @@ export const StatementsQuery = gql`
         id
         text
         speaker {
+          id
+          slug
           fullName
           title
+          picture
         }
         video {
           hashId

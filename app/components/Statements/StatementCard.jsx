@@ -25,6 +25,7 @@ import {
   joinStatementsChannel,
   leaveStatementsChannel,
 } from '../../state/video_debate/statements/effects'
+import { MicrophoneAlt } from 'styled-icons/boxicons-regular/MicrophoneAlt'
  
 const Statement = styled.div`
   background: #31455d;
@@ -190,7 +191,10 @@ class StatementCard extends React.PureComponent {
         <Statement>
           {statement.speaker && 
             <StatementHeader>
-              <div className="speaker">{statement.speaker.fullName}</div>
+              <div>
+                {this.renderSpeakerThumb(statement.speaker)}
+                <strong>{this.renderSpeakerName(statement.speaker)}</strong>
+              </div>
               {// Since speaker.title can be null, we only display it if set
                 statement.speaker.title && <div className="speaker-title">{statement.speaker.title}</div>}
             </StatementHeader>
@@ -317,7 +321,15 @@ class StatementCard extends React.PureComponent {
   }
 
   renderSpeakerName(speaker) {
-    return <Link to={`/s/${speaker.slug || speaker.id}`}>{speaker.full_name}</Link>
+    return <Link to={`/s/${speaker.slug || speaker.id}`}>{speaker.fullName}</Link>
+  }
+
+  renderSpeakerThumb(speaker) {
+    return speaker.picture ? (
+      <img alt="" className="speaker-picture" src={speaker.picture} />
+    ) : (
+      <MicrophoneAlt size="2.75em" />
+    )
   }
 }
 
