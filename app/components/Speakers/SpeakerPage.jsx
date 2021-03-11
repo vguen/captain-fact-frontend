@@ -126,7 +126,6 @@ export class SpeakerPage extends React.PureComponent {
           </DismissableMessage>
         </div>
         <br />
-        {this.renderVideos()}
         <section>
           <h3>{t('speakerpage.videos')}</h3>
           <PaginatedVideosContainer
@@ -151,21 +150,6 @@ export class SpeakerPage extends React.PureComponent {
       return '...'
     }
     return this.renderLink(this.props.links.wikipedia, 'Wikipedia')
-  }
-
-  renderVideos() {
-    if (this.props.videosLoading || !this.props.speaker) {
-      return <LoadingFrame />
-    }
-
-    const currentPage = parseInt(this.props.location.query.page) || 1
-    return (
-      <PaginatedVideosContainer
-        baseURL={this.props.location.pathname}
-        currentPage={currentPage}
-        speakerID={this.props.speaker.id}
-      />
-    )
   }
 
   renderLink(url, siteName) {
