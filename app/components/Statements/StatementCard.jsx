@@ -1,30 +1,14 @@
 import React from 'react'
 import { Fragment } from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { withNamespaces } from 'react-i18next'
 
 import styled from 'styled-components'
-import { themeGet } from 'styled-system'
 
 import StatementComments from './StatementComments.jsx'
 import CommentForm from '../Comments/CommentForm'
 import { withLoggedInUser } from '../LoggedInUser/UserProvider'
-import { Icon, TimeSince } from '../Utils'
-import CardLayout from '../Utils/CardLayout'
 import RawIcon from '../Utils/RawIcon'
-import { MAX_VIDEO_CARD_SPEAKERS } from '../../constants'
 import { statementURL } from '../../lib/cf_routes'
-import iterateWithSeparators from '../../lib/iterate_with_separators'
-import { classifyComments } from '../../state/video_debate/comments/selectors'
-import {
-  joinCommentsChannel,
-  leaveCommentsChannel,
-} from '../../state/video_debate/comments/effects'
-import {
-  joinStatementsChannel,
-  leaveStatementsChannel,
-} from '../../state/video_debate/statements/effects'
 import { MicrophoneAlt } from 'styled-icons/boxicons-regular/MicrophoneAlt'
  
 const Statement = styled.div`
