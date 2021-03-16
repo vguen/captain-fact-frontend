@@ -69,9 +69,6 @@ class CommentForm extends React.Component {
   }
 
   onSubmit = ({ text, source, approve }, { resetForm, setErrors }) => {
-    console.log("get(this.props, 'replyTo.id', null) = ", get(this.props, 'replyTo.id', null))
-    console.log("source = ", source)
-    console.log("statementID = ", this.props.statementID)
     return this.props
       .postComment({
         statement_id: this.props.statementID,
@@ -81,7 +78,6 @@ class CommentForm extends React.Component {
         approve,
       })
       .then((e) => {
-        console.log(".then: ", e)
         if (e.error) {
           setErrors(e.payload)
         } else {
@@ -90,7 +86,6 @@ class CommentForm extends React.Component {
         }
       })
       .catch((e) => {
-        console.log(".catch: ", e)
         logError(e)
         this.props.errorToFlash(e)
       })
