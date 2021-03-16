@@ -8,7 +8,6 @@ import { LoadingFrame } from '../Utils/LoadingFrame'
 import { ErrorView } from '../Utils/ErrorView'
 import { StatementsGrid } from './StatementsGrid'
 import PaginationMenu from '../Utils/PaginationMenu'
-import { ONLY_PARTNERS, ONLY_FEATURED } from '../../constants'
 import { StatementsQuery } from '../../API/graphql_queries'
 import styled from 'styled-components'
 
