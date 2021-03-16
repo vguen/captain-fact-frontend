@@ -32,28 +32,11 @@ export const joinCommentsChannel = (videoId) => (dispatch) => {
   )
 }
 
-export const joinCommentsTestChannel = (statementId) => (dispatch) => {
-  // Connect to channel
-  dispatch(setLoading(true))
-  dispatch(
-    fetchAll(
-      SocketApi.joinChannel(COMMENTS_CHANNEL, `comments:statement:${statementId}`, {
-        comment_removed: (c) => dispatch(remove(c)),
-        comment_added: (c) => dispatch(add(c)),
-        comment_score_diff: (p) => dispatch(scoreDiff(p)),
-        comment_updated: (c) => dispatch(update(c)),
-        comments_scores_updated: ({ comments }) => dispatch(updateScores(comments)),
-      })
-    )
-  )
-}
-
 export const leaveCommentsChannel = () => () => {
   return SocketApi.leaveChannel(COMMENTS_CHANNEL)
 }
 
 export const postComment = (comment) => {
-  console.log("test")
   return createEffect(SocketApi.push(COMMENTS_CHANNEL, 'new_comment', comment), {
     catch: generateFSAError,
   })
