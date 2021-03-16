@@ -11,7 +11,7 @@ import PaginationMenu from '../Utils/PaginationMenu'
 import { StatementsQuery } from '../../API/graphql_queries'
 import styled from 'styled-components'
 
-const INITIAL_VIDEOS = { pageNumber: 1, totalPages: 1, entries: [] }
+const INITIAL_STATEMENTS = { pageNumber: 1, totalPages: 1, entries: [] }
 
 const StatementPaginationMenu = styled(PaginationMenu)`
   && {
@@ -47,7 +47,7 @@ const PaginatedStatementsContainer = ({
       fetchPolicy="network-only"
     >
       {({ loading, error, data }) => {
-        const statements = get(data, statementsPath, INITIAL_VIDEOS)
+        const statements = get(data, statementsPath, INITIAL_STATEMENTS)
         if (error) {
           return <ErrorView error={error} />
         }
