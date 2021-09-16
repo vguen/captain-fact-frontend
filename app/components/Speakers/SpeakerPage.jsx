@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router'
+import { Link, withRouter } from 'react-router'
 import { withNamespaces } from 'react-i18next'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
@@ -25,6 +25,12 @@ const SpeakerPageBody = styled.div`
     font-size: 3em;
     text-align: center;
     padding-bottom: 20px;
+  }
+
+  .button {
+    display: flex;
+    max-width: min-content;
+    margin: 0 auto;
   }
 `
 
@@ -133,6 +139,9 @@ export class SpeakerPage extends React.PureComponent {
             limit={4}
             showPagination={false}
           />
+          <div className="button is-primary">
+            <span>"More videos staring "{speaker.full_name}</span>
+          </div>
         </section>
         <StatementSection>
           <h3>{t('speakerpage.statements')}</h3>
@@ -140,6 +149,15 @@ export class SpeakerPage extends React.PureComponent {
             speakerID={this.props.speaker.id}
             showPagination={false}
           />
+          <Link className="button is-primary"
+           to={{
+             pathname: '/last_statements',
+             context: {
+               speakerID: `${this.props.speaker.id}`
+             }
+           }}>
+            <span>"More statements from "{speaker.full_name}</span>
+          </Link>
         </StatementSection>
       </SpeakerPageBody>
     )
